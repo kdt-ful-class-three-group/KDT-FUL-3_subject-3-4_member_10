@@ -5,7 +5,20 @@ const http = require('http');
 // createServer 활용, request respose 매개변수//
 const server = http.createServer(function (req, res) {
   
-//todo GET 생성//
+  //* GET 생성(홈,글 목록, 글상세)//
+  // method, url 변수//
+  const method = req.method;
+  const url = req.url;
+  if (method === 'GET') {
+    if (url === '/') {
+      
+    } else if (url === '/list') {
+      
+    } else if (url === '/info') {
+      
+    }
+  }
+
 
 });
 
