@@ -5,6 +5,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const qs = require('querystring');
+const { json } = require('stream/consumers');
 // const path = require('path');
 // createServer 활용, request respose 매개변수//
 // error404 설정( error.html을 만들어서 html로 가게 요청)
@@ -22,12 +23,14 @@ const server = http.createServer(function (req, res, err) {
       const home = fs.readFileSync('index.html');
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(home);
-    } else if (pathname === '/list') {
-      res.writeHead(200)
-      res.end('list')
-    } if (pathname === '/info') {
-      res.writeHead(200)
-      res.end('info')
+    } else if (pathname === '/writePost.html') {
+      const write = fs.readFileSync('writePost.html')
+      res.writeHead(200, {"Content-type": "text/html"})
+      res.end(write);
+    } if (pathname === '/list.html') {
+      const list = fs.readFileSync('list.html')
+      res.writeHead(200, {"Content-type": "text/html"})
+      res.end(list);
     }
   }
 
@@ -37,9 +40,12 @@ const server = http.createServer(function (req, res, err) {
   else if (pathname === '/add' && req.method === 'POST') {
     let body = "";
     req.on('data', (data) => {
-      body = body + data;
+      body = body + data
     })
     req.on('end', () => {
+      const querystringPS = qs.parse(body);
+      fs.appendFileSync('prac.json', body);
+
     })
   }
 });
@@ -49,3 +55,8 @@ server.listen(8000, function () {
   console.log('서버진행중.. http://localhost:8000/');
 });
 
+function pracJSON() {
+  const jsonFile = fs.readFileSync('prac.json')
+  console.log(JSON.parse(jsonFile.toString()));
+}
+pracJSON();
