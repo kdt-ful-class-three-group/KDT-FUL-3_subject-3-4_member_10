@@ -1,13 +1,17 @@
-{
-  "head": "ddd",
+[
+  {
+    "head": "ㅁㅁㅁ",
+    "content": "ㅁㅁㅁㅁ"
+  }
+][
+  {
+    "head": "ㅂㅂㅂ",
+    "content": "ㅂㅂㅂㅂ"
+  }
+]{
+  "head": "dd",
   "content": "ddd"
 }{
-  "head": "dd",
-  "content": "dd"
-}{
-  "head": "최",
-  "content": "현준"
-}{
-  "head": "글 작성",
-  "content": "성공"
+  "head": "ss",
+  "content": "ss"
 }

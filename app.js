@@ -43,9 +43,11 @@ const server = http.createServer(function (req, res, err) {
       body = body + data
     })
     req.on('end', () => {
-      // fs.appendFileSync('prac.json', body);
+      // const arr = [];
         const jsonFile = body.toString();
         const parseFile = qs.parse(jsonFile);
+        // arr.push(parseFile);
+
         const test = JSON.stringify(parseFile, null, 2);
         fs.appendFileSync('data.json', test);
 
@@ -74,4 +76,12 @@ server.listen(8000, function () {
         // const parseFile = qs.parse(stringFile);
         // const test = JSON.stringify(parseFile, null, 2);
         
-        // fs.appendFileSync('user.json', test);
+// fs.appendFileSync('user.json', test);
+function postList() {
+  const jsonList = [];     
+  const jsonFile = fs.readFileSync('data.JSON');
+  jsonList.push(jsonFile);
+  const a = jsonList.toString();
+  console.log(a);
+}
+postList();
