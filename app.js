@@ -43,8 +43,14 @@ const server = http.createServer(function (req, res, err) {
       body = body + data
     })
     req.on('end', () => {
-      const querystringPS = qs.parse(body);
-      fs.appendFileSync('prac.json', body);
+      // fs.appendFileSync('prac.json', body);
+        const jsonFile = body.toString();
+        const parseFile = qs.parse(jsonFile);
+        const test = JSON.stringify(parseFile, null, 2);
+        fs.appendFileSync('data.json', test);
+
+      res.writeHead(200, { "Content-type": "application/JSON" });
+      res.end();
 
     })
   }
@@ -55,8 +61,17 @@ server.listen(8000, function () {
   console.log('서버진행중.. http://localhost:8000/');
 });
 
-function pracJSON() {
-  const jsonFile = fs.readFileSync('prac.json')
-  console.log(JSON.parse(jsonFile.toString()));
-}
-pracJSON();
+// function pracJSON() {
+//   const stringifyJson = JSON.stringify(jsonFile).split('&');
+
+//   console.log(stringifyJson);
+// }
+// pracJSON();
+
+        // const stringText = fs.readFileSync('string.txt');
+        // const stringFile = stringText.toString();
+        
+        // const parseFile = qs.parse(stringFile);
+        // const test = JSON.stringify(parseFile, null, 2);
+        
+        // fs.appendFileSync('user.json', test);
