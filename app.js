@@ -5,7 +5,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const qs = require('querystring');
-const path = require('path');
+// const path = require('path');
 // createServer 활용, request respose 매개변수//
 // error404 설정( error.html을 만들어서 html로 가게 요청)
 const server = http.createServer(function (req, res, err) {
@@ -36,15 +36,10 @@ const server = http.createServer(function (req, res, err) {
   //form data JSON 변환 과정 //
   else if (pathname === '/add' && req.method === 'POST') {
     let body = "";
-    req.on('data', (chunk) => {
-      body = body + chunk;
-      const filePath = path.join(__dirname, "data.json")
-      fs.writeFile(filePath, JSON.stringify(chunk));
+    req.on('data', (data) => {
+      body = body + data;
     })
     req.on('end', () => {
-      const string = qs.parse(body);
-      console.log(string);
-      fs.appendFileSync('data.JSON', string);
     })
   }
 });
@@ -53,3 +48,4 @@ const server = http.createServer(function (req, res, err) {
 server.listen(8000, function () {
   console.log('서버진행중.. http://localhost:8000/');
 });
+
