@@ -43,16 +43,18 @@ const server = http.createServer(function (req, res, err) {
       body = body + data
     })
     req.on('end', () => {
-      // const arr = [];
-        const jsonFile = body.toString();
-        const parseFile = qs.parse(jsonFile);
-        // arr.push(parseFile);
 
-        const test = JSON.stringify(parseFile, null, 2);
-        fs.appendFileSync('data.json', test);
+      addPost(body);
+      const addPage = fs.readFileSync('writePost.html');
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(addPage);
+      //   const jsonFile = body.toString();
+      //   const parseFile = qs.parse(jsonFile);
+      //   const test = JSON.stringify(parseFile, null, 2);
+      //   fs.appendFileSync('data.json', test);
 
-      res.writeHead(200, { "Content-type": "application/JSON" });
-      res.end();
+      // res.writeHead(200, { "Content-type": "text/hmtl" });
+      // res.end(postList());
 
     })
   }
@@ -63,25 +65,32 @@ server.listen(8000, function () {
   console.log('서버진행중.. http://localhost:8000/');
 });
 
-// function pracJSON() {
-//   const stringifyJson = JSON.stringify(jsonFile).split('&');
+function addPost(body) {
+    const parseFile = qs.parse(body);
+    const stringJson = JSON.stringify(parseFile);
+  const psJson = JSON.parse(stringJson);
+  const arrJson = postList();
+  arrJson.push(psJson);
+  fs.writeFile('data.json', JSON.stringify(arrJson, null, 2), () => {
+    console.log('데이터 저장');
+  });
+};
 
-//   console.log(stringifyJson);
-// }
-// pracJSON();
 
-        // const stringText = fs.readFileSync('string.txt');
-        // const stringFile = stringText.toString();
-        
-        // const parseFile = qs.parse(stringFile);
-        // const test = JSON.stringify(parseFile, null, 2);
-        
-// fs.appendFileSync('user.json', test);
+
+
+
+
+      
 function postList() {
-  const jsonList = [];     
-  const jsonFile = fs.readFileSync('data.JSON');
-  jsonList.push(jsonFile);
-  const a = jsonList.toString();
-  console.log(a);
+  const jsonList = [];
+  const jsonFile = fs.readFileSync('data.JSON').toString();
+  if (jsonFile !== '') {
+    const dataObj = JSON.parse(jsonFile);
+    console.log(dataObj);
+    dataObj.forEach((element) => {
+      jsonList.push(element);
+    });
+  }
+  return jsonList;
 }
-postList();
