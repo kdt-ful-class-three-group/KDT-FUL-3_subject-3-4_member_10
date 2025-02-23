@@ -4,8 +4,8 @@
 import http from 'http';
 import url from 'url';
 import fs from 'fs';
-import { addPost } from './post.js';
-import { listPage } from './listPage.js';
+import { addPost, postList } from './post.js';
+import { listPage, infoPage } from './listPage.js';
 
 //* createServer 활용, request respose 매개변수//
 //* error404 설정( error.html을 만들어서 html로 가게 요청)
@@ -18,6 +18,7 @@ const server = http.createServer(function (req, res, err) {
 
   //* GET 생성(홈,글 목록, 글상세) //
   const pathname = url.parse(req.url, true).pathname;
+  const query = url.parse(req.url, true).query;
   if (req.method === 'GET') {
     if (pathname === '/') {
       const home = fs.readFileSync('index.html');
@@ -27,10 +28,18 @@ const server = http.createServer(function (req, res, err) {
       const write = fs.readFileSync('writePost.html');
       res.writeHead(200, { "Content-type": "text/html" });
       res.end(write);
+      //* /list 동적으로만든 글 목록 페이지 경로 추가 //
     } else if (pathname === '/list') {
       const list = listPage();  
       res.writeHead(200, { "Content-type": "text/html" });
       res.end(list);
+
+      //* /info 글 상세보기 경로 요청 추가
+    } else if (pathname === '/info') {
+      const index = query.index;
+      
+      res.writeHead(200, { "Content-type": "text/html" });
+      res.end(infoPage(index));
     }
   }
 
