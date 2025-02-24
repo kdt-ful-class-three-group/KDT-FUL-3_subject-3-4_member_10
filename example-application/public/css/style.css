@@ -1,0 +1,39 @@
+.nav {
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  position: relative;
+  background-color: #a3a1a1;
+  color: #e3dede;
+  border: none;
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.1s;
+}
+
+a:hover {
+  letter-spacing: 2px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.img-size {
+
+  width: 400px;
+  height: 300px;
+}
