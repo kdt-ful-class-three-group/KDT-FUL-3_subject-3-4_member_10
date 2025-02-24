@@ -8,7 +8,7 @@ function listPage() {
   //* forEach문으로 json데이터의 제목갯수만큼 리스트 추가
   //* 상세보기버튼을 추가하기위해서 매개변수 1개 더 생성.
   posts.forEach((post, index) => {
-    listitems += `<li>${post.head}<button onclick="location.href='/info?index=${index}'">상세보기</button>
+    listitems += `<li>${post.head}<button onclick="location.href='/info?index=${index}'">자세히</button>
 </li>`;  
   });
 
@@ -18,15 +18,20 @@ function listPage() {
   <head>
     <meta charset="UTF-8">
     <title>글 목록</title>
-  </head>
+    </head>
+    <link rel="stylesheet" href="/example-application/public/css/style.css">
   <body>
-  <div>  
+  <div id="root">
+  <div class="nav">  
     <a href="/">홈</a>
     <a href="/example-application/public/writePost.html">글 작성</a>
     <a href="/list">글 목록</a>
+    </div>
     <h1>글 목록</h1>
+    <div class="content-box">
     ${listitems}
     </div>
+  <div>
   </body>
   </html>
   `
@@ -47,18 +52,23 @@ function infoPage(index) {
       <meta charset="UTF-8">
       <title>글 상세보기</title>
     </head>
+    <link rel="stylesheet" href="/example-application/public/css/style.css">
     <body>
-    <div>  
+    <div class="nav">  
       <a href="/">홈</a>
       <a href="/example-application/public/writePost.html">글 작성</a>
       <a href="/list">글 목록</a>
-      <h1>${posts[index].head}</h1>
+    </div>
+    <div class="content-box">
+    <h2>${posts[index].head}</h2>
       <p>내용: ${posts[index].content}</p>
       <p>작성일: ${date}</p>
+      <div id="info-btn">
       <button onclick="location.href='/edit?index=${index}'">수정</button>
       <form action="/delete" method="POST">
-      <input type="hidden" name="index" value="${index}">
       <button type="submit">삭제</button>
+      <input type="hidden" name="index" value="${index}">
+      </div>
       </form>
     </div>
     </body>
@@ -66,13 +76,6 @@ function infoPage(index) {
   `;
   }
 }
-
-function postDate() {
-  
-
-}
-
-
 
 function editPage(index) {
   const posts = postList();
@@ -83,18 +86,21 @@ if(posts[index])
   <head>
     <meta charset="UTF-8">
     <title>글 수정</title>
+    <link rel="stylesheet" href="/example-application/public/css/style.css">
   </head>
   <body>
-    <div>
+    <div class="nav">
       <a href="/">홈</a>
       <a href="/example-application/public/writePost.html">글 작성</a>
       <a href="/list">글 목록</a>
-      <h1>글 수정</h1>
+    </div>
+    <h1>글 수정</h1>
+    <div class="content-box">
       <form action="/update" method="POST">
         <input type="hidden" name="index" value="${index}">
-        <label>제목: <input type="text" name="head" value="${posts[index].head}" required></label>
+        <p>제목: </p><input type="text" name="head" value="${posts[index].head}">
         <br>
-        <label>내용: <textarea name="content" required>${posts[index].content}</textarea></label>
+        <p>내용: </p><textarea name="content" >${posts[index].content}</textarea>
         <br>
         <button type="submit">수정 완료</button>
       </form>

@@ -1,3 +1,6 @@
+*{
+  margin: 0% 5%
+}
 .nav {
   height: 100px;
   display: flex;
@@ -6,11 +9,6 @@
 
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
 
 a {
   position: relative;
@@ -32,8 +30,48 @@ a:hover {
   cursor: pointer;
 }
 
-.img-size {
+h1 {
+  text-align: center;
+  align-items: center;
+}
 
-  width: 400px;
-  height: 300px;
+li {
+  margin: 2px;
+  padding: 10;
+  list-style-type: none;
+  font-size: 20px;
+}
+input, textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 300px;
+}
+button {
+    padding: 5px 10px;
+    display: flex;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#main-header {
+  font-size: 100px;
+}
+
+.content-box {
+  border: 1px solid;
+  font-size: 20px;
+  text-align: start;
+  align-items: start;
+}
+#info-btn {
+  display: flex;
+  justify-content: flex-end;
 }

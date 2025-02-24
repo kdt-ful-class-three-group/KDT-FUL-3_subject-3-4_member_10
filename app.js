@@ -42,17 +42,21 @@ const server = http.createServer(function (req, res, err) {
       const list = listPage();
       res.writeHead(200, { "Content-type": "text/html" });
       res.end(list);
-
       //* /info 글 상세보기 경로 요청 추가
       // 여기도 동적으로 만든 html 함수 -> infoPage()와 editPage()
     } else if (pathname === '/info') {
       const index = query.index;
       res.writeHead(200, { "Content-type": "text/html" });
       res.end(infoPage(index));
+      //* /edit 글 수정 경로 요청 추가 info와 같은 방식
     } else if (pathname === '/edit') {
       const index = query.index;
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(editPage(index));
+    } else if (pathname === '/example-application/public/css/style.css') {
+      const style = fs.readFileSync('./example-application/public/css/style.css')
+      res.writeHead(200, { "Content-Type": "text/css" });
+      res.end(style);
     }
   }
 
