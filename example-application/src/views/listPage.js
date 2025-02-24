@@ -1,12 +1,14 @@
+//* postList()함수필요해서 import
 import { postList } from "../post.js";
+
 //* 리스트 페이지 구현 (html파일로 만들면 읽는데 불편함이 있어 js파일 함수로 동적 html생성함.)
 function listPage() {
   const posts = postList();
   let listitems = '';
   
-
   //* forEach문으로 json데이터의 제목갯수만큼 리스트 추가
   //* 상세보기버튼을 추가하기위해서 매개변수 1개 더 생성.
+  // 상세보기하고싶은 index페이지로 리다이렉션 경로이동 //
   posts.forEach((post, index) => {
     listitems += `<li>${post.head}<button onclick="location.href='/info?index=${index}'">자세히</button>
 </li>`;  
@@ -77,6 +79,9 @@ function infoPage(index) {
   }
 }
 
+
+//* 수정페이지 함수
+// posts는 json 데이터를 담은 배열 // 
 function editPage(index) {
   const posts = postList();
 if(posts[index])

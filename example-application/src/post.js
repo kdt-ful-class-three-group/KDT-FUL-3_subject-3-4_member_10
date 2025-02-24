@@ -4,14 +4,14 @@ import fs from 'fs';
 
 //* json.data 읽어올 수 있게 만들어봄.
 // 동기식으로 불러온 json파일을 JSON.parse하여 빈 배열안에 담은 후 읽기 //
-// + forEach문 사용.
+// + forEach문 사용. // err 요청 try catch 문으로 해봄. //
 function postList() {
   const jsonList = [];
   try {
     const jsonFile = fs.readFileSync('data.json', 'utf-8');
     if (jsonFile) {
-      const dataObj = JSON.parse(jsonFile);
-      dataObj.forEach((item) => {
+      const psJson = JSON.parse(jsonFile);
+      psJson.forEach((item) => {
         jsonList.push(item);
       });
     }

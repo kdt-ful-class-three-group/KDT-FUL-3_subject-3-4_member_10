@@ -100,6 +100,7 @@ const server = http.createServer(function (req, res, err) {
     })
     req.on('end', () => {
       const qsPs = qs.parse(body);
+      // 문자열을 숫자열로 전환 parseInt() 뒤에 10은 10진수를 의미. 원하는 값이 실수면 parseFloat()
       const index = parseInt(qsPs.index, 10);
 
       // 글을 삭제하는 함수 //
