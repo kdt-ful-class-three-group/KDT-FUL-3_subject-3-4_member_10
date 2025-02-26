@@ -1,17 +1,17 @@
-import { createTag,divTag } from "./tag.js";
+import { divTag } from "../forms/tag.js";
 
 //* html 만드는 함수 //
 function template(title, content) {
   const style = `
   <link rel="stylesheet" href="/example-application/public/css/style.css">
   `
-  const nav = `
-    <div class="nav">
+  const link = `
       <a href="/">홈</a>
-      <a href="/example-application/public/writePost.html">글 작성</a>
+      <a href="/write>글 작성</a>
       <a href="/list">글 목록</a>
-    </div>
   `
+  const navForm = divTag(link, "nav")
+  
   return `
   <!DOCTYPE html>
   <html>
@@ -21,7 +21,7 @@ function template(title, content) {
     ${style}
   </head>
   <body>
-    ${nav}
+    ${navForm}
     <div>
     <h1>${title}</h1>
     ${content}

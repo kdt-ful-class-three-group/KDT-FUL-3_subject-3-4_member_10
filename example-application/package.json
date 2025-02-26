@@ -1,12 +1,11 @@
 {
   "name": "kdt-ful-3_subject-3-4_member_10",
   "version": "1.0.0",
-  "description": "평가 시작하겠습니다.",
   "main": "app.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10.git"
@@ -16,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10/issues"
   },
-  "homepage": "https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10#readme"
+  "homepage": "https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10#readme",
+  "description": ""
 }

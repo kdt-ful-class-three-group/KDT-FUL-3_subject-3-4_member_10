@@ -5,10 +5,13 @@ import http from 'http';
 import url from 'url';
 import fs from 'fs';
 import qs from 'querystring';
-import { addPost, updatePost, deletePost } from './example-application/src/post.js';
-import { listPage, infoPage, editPage } from './example-application/src/views/listPage.js';
-import { alertPage } from './example-application/src/views/alertPage.js';
-
+import { addPost, updatePost, deletePost } from './src/models/post.js';
+import { addPage } from './src/views/pages/Add.js';
+import { alertPage } from './src/views/Pages/Alert.js';
+import { editPage } from './src/views/Pages/Edit.js';
+import { infoPage } from './src/views/Pages/Info.js';
+import { listPage } from './src/views/Pages/List.js';
+import { errorPage } from './src/views/pages/Error.js';
 
 const PORT = 8000;
 //* createServer 활용, request respose 매개변수//
@@ -17,9 +20,8 @@ const PORT = 8000;
 //! 에러처리를 조금 더 깔끔하게 쓰는 방법이 없을까? //
 const server = http.createServer(function (req, res, err) {
   if (err) {
-    const errorFile = fs.readFileSync('./example-application/public/error.html');
     res.writeHead(404, { "Content-Type": "text/html" });
-    res.end(errorFile);
+    res.end(errorPage('Error'));
   }
 
   //* GET 생성(홈,글 목록, 글상세) //
@@ -32,8 +34,8 @@ const server = http.createServer(function (req, res, err) {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(home);
       // 하위폴더로 나눠서 경로가 복잡해짐 //
-    } else if (pathname === '/example-application/public/writePost.html') {
-      const write = fs.readFileSync('./example-application/public/writePost.html');
+    } else if (pathname === '/write') {
+      const write = addPage();
       res.writeHead(200, { "Content-type": "text/html" });
       res.end(write);
       //* /list 동적으로만든 글 목록 페이지 경로 추가 //
@@ -53,8 +55,8 @@ const server = http.createServer(function (req, res, err) {
       const index = query.index;
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(editPage(index));
-    } else if (pathname === '/example-application/public/css/style.css') {
-      const style = fs.readFileSync('./example-application/public/css/style.css')
+    } else if (pathname === '/public/css/style.css') {
+      const style = fs.readFileSync('./public/css/style.css')
       res.writeHead(200, { "Content-Type": "text/css" });
       res.end(style);
     }
