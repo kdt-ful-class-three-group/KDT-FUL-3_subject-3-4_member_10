@@ -16,5 +16,8 @@
     "url": "https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10/issues"
   },
   "homepage": "https://github.com/kdt-ful-class-three-group/KDT-FUL-3_subject-3-4_member_10#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }

@@ -6,12 +6,12 @@ import url from 'url';
 import fs from 'fs';
 import qs from 'querystring';
 import { addPost, updatePost, deletePost } from './src/models/post.js';
-import { addPage } from './src/views/pages/Add.js';
-import { alertPage } from './src/views/Pages/Alert.js';
-import { editPage } from './src/views/Pages/Edit.js';
-import { infoPage } from './src/views/Pages/Info.js';
-import { listPage } from './src/views/Pages/List.js';
-import { errorPage } from './src/views/pages/Error.js';
+import { addPage } from './src/views/pages/add.js';
+import { alertPage } from './src/views/pages/alert.js';
+import { editPage } from './src/views/pages/edit.js';
+import { infoPage } from './src/views/pages/info.js';
+import { listPage } from './src/views/pages/list.js';
+import { errorPage } from './src/views/pages/error.js';
 
 const PORT = 8000;
 //* createServer 활용, request respose 매개변수//

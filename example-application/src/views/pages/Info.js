@@ -1,7 +1,6 @@
 import { postList } from "../../models/post.js";
 import { template } from "../Template/template.js";
-import { divTag } from "../tag.js";
-
+import { divTag } from "../forms/tag.js";
 
 //* 상세보기 페이지 
 //* 상세보기 페이지도 위의 리스트 페이지와 같이 콜백으로 동적 html 구현.

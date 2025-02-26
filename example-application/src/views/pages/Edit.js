@@ -1,6 +1,7 @@
 import { postList } from "../../models/post.js";
-import { template } from "../Template/template.js";
-import { divTag } from "../tag.js";
+import { template } from "../Template/template.js"
+import { divTag } from "../forms/tag.js"
+
 
 
 //* 수정페이지 함수
