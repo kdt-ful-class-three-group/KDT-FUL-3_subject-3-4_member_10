@@ -61,57 +61,61 @@ const server = http.createServer(function (req, res, err) {
   }
 
   //* POST 생성(글 작성 부분)//
-  //* 경로 /add로 요청. 
+  //* 경로 /add로 요청.
   // post로 받아온 데이터를 리스트화하는 과정 //
-  else if (pathname === '/add' && req.method === 'POST') {
-    let body = "";
-    req.on('data', (data) => {
-      body = body + data;
-    });
-    req.on('end', () => {
-      addPost(body);
-      // 자꾸 input에 데이터를 입력해도 list에 바로 올라가지 않는 오류 수정 완료.
-      // 글 작성후 글 목록으로 리다이렉트 
-      res.writeHead(200, { "Content-type": "text.html" });
-      res.end(alertPage('작성되었습니다.'),console.log('데이터 저장'));
-    });
-    //* /update 경로 요청후 POST 데이터 받고 리스트 수정.
-  } else if (pathname === '/update' && req.method === 'POST') {
-    let body = "";
-    req.on('data', (data) => {
-      body = body + data;
-    })
-    req.on('end', () => {
-      const qsPs = qs.parse(body);
-      const index = parseInt(qsPs.index, 10);
-      const head = qsPs.head;
-      const content = qsPs.content
-      // json데이터에 덮어쓰는 함수 .
-      updatePost(index, head, content);
-      res.writeHead(200, { "Content-type": "text/html" });
-      res.end(alertPage('수정되었습니다.'),console.log('데이터 수정'));
-    })
+  //todo POST 상위 부모로 뽑기 
+  else if (req.method === "POST") {
+    if (pathname === '/add') {
+      let body = "";
+      req.on('data', (data) => {
+        body = body + data;
+      });
+      req.on('end', () => {
+        addPost(body);
+        // 자꾸 input에 데이터를 입력해도 list에 바로 올라가지 않는 오류 수정 완료.
+        // 글 작성후 글 목록으로 리다이렉트 
+        res.writeHead(200, { "Content-type": "text.html" });
+        res.end(alertPage('작성되었습니다.'), console.log('데이터 저장'));
+      });
+      //* /update 경로 요청후 POST 데이터 받고 리스트 수정.
+    } else if (pathname === '/update' && req.method === 'POST') {
+      let body = "";
+      req.on('data', (data) => {
+        body = body + data;
+      })
+      req.on('end', () => {
+        const qsPs = qs.parse(body);
+        const index = parseInt(qsPs.index, 10);
+        const head = qsPs.head;
+        const content = qsPs.content;
+        // json데이터에 덮어쓰는 함수 .
+        updatePost(index, head, content);
+        res.writeHead(200, { "Content-type": "text/html" });
+        res.end(alertPage('수정되었습니다.'), console.log('데이터 수정'));
+      })
+      //* 글 삭제 POST방식으로 /delete요청받아옴.//
+    } else if (pathname === '/delete' && req.method === "POST") {
+      let body = "";
+      req.on('data', (data) => {
+        body = body + data;
+      })
+      req.on('end', () => {
+        const qsPs = qs.parse(body);
+        // 문자열을 숫자열로 전환 parseInt() 뒤에 10은 10진수를 의미. 원하는 값이 실수면 parseFloat()
+        const index = parseInt(qsPs.index, 10);
 
-    //* 글 삭제 POST방식으로 /delete요청받아옴.//
-  } else if (pathname === '/delete' && req.method === "POST") {
-    let body = "";
-    req.on('data', (data) => {
-      body = body + data;
-    })
-    req.on('end', () => {
-      const qsPs = qs.parse(body);
-      // 문자열을 숫자열로 전환 parseInt() 뒤에 10은 10진수를 의미. 원하는 값이 실수면 parseFloat()
-      const index = parseInt(qsPs.index, 10);
-
-      // 글을 삭제하는 함수 //
-      deletePost(index);
-      res.writeHead(200, { "Content-type": "text/html" });
-      res.end(alertPage('삭제되었습니다.'),console.log('데이터 삭제'));
-    })
+        // 글을 삭제하는 함수 //
+        deletePost(index);
+        res.writeHead(200, { "Content-type": "text/html" });
+        res.end(alertPage('삭제되었습니다.'), console.log('데이터 삭제'));
+      })
+    }
   }
 });
 
-//* 포트 8000설정, 콘솔로그 주소찍기//
-server.listen(PORT, function () {
-  console.log('서버진행중.. http://localhost:8000/');
-});
+   
+
+  //* 포트 8000설정, 콘솔로그 주소찍기//
+  server.listen(PORT, function () {
+    console.log('서버진행중.. http://localhost:8000/');
+  });

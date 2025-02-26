@@ -115,3 +115,5 @@ if(posts[index])
   `
 }
 export { listPage, infoPage, editPage };
+
+
