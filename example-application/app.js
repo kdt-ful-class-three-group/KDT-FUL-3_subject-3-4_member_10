@@ -1,8 +1,6 @@
 //* 서버 생성하기 //
 // http, url, fs 불러왔음.
 // addPost,listPage 함수도 불러옴
-// import http from 'http';
-import url from 'url';
 import fs from 'fs';
 import qs from 'querystring';
 import { addPost, updatePost, deletePost } from './src/models/post.js';
@@ -16,9 +14,13 @@ import { errorPage } from './src/views/pages/error.js';
 //todo express사용해보기 /
 import express from 'express';
 const app = express();
-
-
 const PORT = 8000;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use('/public', express.static('public'));
+
 //* 기본 홈 설정. + err페이지 설정과 함께 한다.(404).
 //* GET 부분 
 app.get('/', (req, res) => {
@@ -47,6 +49,14 @@ app.get('/edit', (req, res) => {
   const index = req.query.index
   res.status(200).send(editPage())
 })
+//* POST 처리하기.
+app.post('/add', (req, res) => {
+  addPost(req.body);
+  console.log('데이터가 저장되었습니다.');
+  res.status(200).send(alertPage('작성되었습니다.'))
+});
+
+
 
 //* 포트 8000설정, 콘솔로그 주소찍기//
 app.listen(PORT, function () {
