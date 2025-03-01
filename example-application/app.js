@@ -1,6 +1,4 @@
 //* 서버 생성하기 //
-// http, url, fs 불러왔음.
-// addPost,listPage 함수도 불러옴
 import fs from 'fs';
 import qs from 'querystring';
 import { addPost, updatePost, deletePost } from './src/models/post.js';
@@ -18,7 +16,7 @@ const PORT = 8000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+// 정적인 css파일을 불러오기위해서 express.static 사용.
 app.use('/public', express.static('public'));
 
 //* 기본 홈 설정. + err페이지 설정과 함께 한다.(404).
@@ -47,13 +45,22 @@ app.get('/info', (req, res) => {
 });
 app.get('/edit', (req, res) => {
   const index = req.query.index
-  res.status(200).send(editPage())
+  res.status(200).send(editPage(index))
 })
-//* POST 처리하기.
+
+
+//* POST 방식
+//* 
 app.post('/add', (req, res) => {
   addPost(req.body);
-  console.log('데이터가 저장되었습니다.');
+  console.log('데이터가 저장되었습니다.', req.body);
   res.status(200).send(alertPage('작성되었습니다.'))
+});
+app.post('/update', (req, res) => {
+  const { index, head, content } = req.body;
+  updatePost(parseInt(index, 10), head, content);
+  console.log('데이터가 수정되었습니다.', req.body);
+  res.status(200).send(alertPage('수정되었습니다.'))
 });
 
 
