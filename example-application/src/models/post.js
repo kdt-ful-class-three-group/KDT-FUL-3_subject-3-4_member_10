@@ -23,12 +23,13 @@ function postList() {
 
 //* 글 작성페이지에서 data입력시 json파일에 저장하는 함수
 function addPost(body) {
-  // 다소복잡한 쿼리스트링 과정 //
-    const parseFile = qs.parse(body);
-    const stringJson = JSON.stringify(parseFile);
-  const psJson = JSON.parse(stringJson);
+  //! app.js에서 이미 req.body가 객체로 사용되므로 파싱이 필요없다.
+  // // 다소복잡한 쿼리스트링 과정 //
+  //   const parseFile = qs.parse(body);
+  //   const stringJson = JSON.stringify(parseFile);
+  // const psJson = JSON.parse(stringJson);
   const arrJson = postList();
-  arrJson.push(psJson);
+  arrJson.push(body);
   fs.writeFile('data.json', JSON.stringify(arrJson, null, 2), () => {
     console.log('데이터 저장');
   });
