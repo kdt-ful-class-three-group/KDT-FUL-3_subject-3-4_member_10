@@ -13,4 +13,5 @@ function errorPage(title) {
   `
 }
 
+
 export { errorPage };
