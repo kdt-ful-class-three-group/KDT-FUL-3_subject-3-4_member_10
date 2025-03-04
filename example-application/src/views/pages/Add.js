@@ -12,4 +12,5 @@ function addPage() {
   return template('글 작성', divTag(addContent, "content-box"));
 }
 
+
 export { addPage };

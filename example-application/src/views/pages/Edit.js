@@ -22,4 +22,5 @@ function editPage(index) {
   }
 }
 
+
 export { editPage };

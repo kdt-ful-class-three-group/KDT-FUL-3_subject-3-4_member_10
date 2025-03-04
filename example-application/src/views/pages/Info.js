@@ -29,4 +29,5 @@ function infoPage(index) {
       }  
 }
 
+
 export { infoPage };

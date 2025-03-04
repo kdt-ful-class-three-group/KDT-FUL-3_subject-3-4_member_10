@@ -14,4 +14,5 @@ function listPage() {
   return template('글 목록', divTag(listitems, "content-box"));
 };
 
+
 export { listPage };

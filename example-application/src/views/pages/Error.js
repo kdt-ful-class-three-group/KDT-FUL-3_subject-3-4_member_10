@@ -12,4 +12,5 @@ function errorPage(title) {
   </html>
   `
 }
+
 export { errorPage };
